@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-content-details-heading" jhiTranslate="schoolOfDeafApp.contentDetails.home.createOrEditLabel">Create or edit a Content Details</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="schoolOfDeafApp.contentDetails.contentPicture" for="field_contentPicture">Content Picture</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('contentPictureContentType')!.value + ';base64,' + editForm.get('contentPicture')!.value" style="max-height: 100px;" *ngIf="editForm.get('contentPicture')!.value" alt="contentDetails image"/>
+                        <div *ngIf="editForm.get('contentPicture')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('contentPictureContentType')!.value }}, {{ byteSize(editForm.get('contentPicture')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('contentPicture', 'contentPictureContentType', 'file_contentPicture')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_contentPicture" (change)="setFileData($event, 'contentPicture', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="contentPicture" id="field_contentPicture"
+                           formControlName="contentPicture"/>
+                    <input type="hidden" class="form-control" name="contentPictureContentType" id="field_contentPictureContentType"
+                           formControlName="contentPictureContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="schoolOfDeafApp.contentDetails.contentSignPicture" for="field_contentSignPicture">Content Sign Picture</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('contentSignPictureContentType')!.value + ';base64,' + editForm.get('contentSignPicture')!.value" style="max-height: 100px;" *ngIf="editForm.get('contentSignPicture')!.value" alt="contentDetails image"/>
+                        <div *ngIf="editForm.get('contentSignPicture')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('contentSignPictureContentType')!.value }}, {{ byteSize(editForm.get('contentSignPicture')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('contentSignPicture', 'contentSignPictureContentType', 'file_contentSignPicture')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_contentSignPicture" (change)="setFileData($event, 'contentSignPicture', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="contentSignPicture" id="field_contentSignPicture"
+                           formControlName="contentSignPicture"/>
+                    <input type="hidden" class="form-control" name="contentSignPictureContentType" id="field_contentSignPictureContentType"
+                           formControlName="contentSignPictureContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="schoolOfDeafApp.contentDetails.video" for="field_video">Video</label>
+                    <input type="text" class="form-control" name="video" id="field_video"
+                           formControlName="video"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="schoolOfDeafApp.contentDetails.content" for="field_content">Content</label>
+                    <select class="form-control" id="field_content" name="content" formControlName="content">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contentOption.id === editForm.get('content')!.value?.id ? editForm.get('content')!.value : contentOption" *ngFor="let contentOption of contents; trackBy: trackById">{{ contentOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

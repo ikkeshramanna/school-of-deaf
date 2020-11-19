@@ -1,0 +1,25 @@
+{
+  "schoolOfDeafApp": {
+    "contentDetails": {
+      "home": {
+        "title": "Content Details",
+        "createLabel": "Create a new Content Details",
+        "createOrEditLabel": "Create or edit a Content Details",
+        "notFound": "No Content Details found"
+      },
+      "created": "A new Content Details is created with identifier {{ param }}",
+      "updated": "A Content Details is updated with identifier {{ param }}",
+      "deleted": "A Content Details is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Content Details {{ id }}?"
+      },
+      "detail": {
+        "title": "Content Details"
+      },
+      "contentPicture": "Content Picture",
+      "contentSignPicture": "Content Sign Picture",
+      "video": "Video",
+      "content": "Content"
+    }
+  }
+}
