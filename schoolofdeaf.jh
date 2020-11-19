@@ -1,0 +1,25 @@
+
+entity Category {
+	categoryName String required
+}
+
+entity Content {
+	contentName String required
+}
+
+entity ContentDetails {
+	contentPicture ImageBlob ,
+    contentSignPicture ImageBlob,
+    video String
+}
+
+relationship ManyToOne {
+	Content{contentCategory} to Category
+}
+
+relationship OneToMany {
+ 	Content to ContentDetails
+}
+
+
+
