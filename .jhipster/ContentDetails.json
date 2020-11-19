@@ -1,0 +1,39 @@
+{
+  "name": "ContentDetails",
+  "fields": [
+    {
+      "fieldName": "contentPicture",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "contentSignPicture",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "video",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "content",
+      "otherEntityRelationshipName": "contentDetails",
+      "relationshipName": "content",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201119121457",
+  "entityTableName": "content_details",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

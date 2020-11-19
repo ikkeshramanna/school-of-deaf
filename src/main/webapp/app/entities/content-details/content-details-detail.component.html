@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="contentDetails">
+            <h2><span jhiTranslate="schoolOfDeafApp.contentDetails.detail.title">Content Details</span> {{ contentDetails.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="schoolOfDeafApp.contentDetails.contentPicture">Content Picture</span></dt>
+                <dd>
+                    <div *ngIf="contentDetails.contentPicture">
+                        <a (click)="openFile(contentDetails.contentPictureContentType, contentDetails.contentPicture)">
+                            <img [src]="'data:' + contentDetails.contentPictureContentType + ';base64,' + contentDetails.contentPicture" style="max-width: 100%;" alt="contentDetails image"/>
+                        </a>
+                        {{ contentDetails.contentPictureContentType }}, {{ byteSize(contentDetails.contentPicture) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="schoolOfDeafApp.contentDetails.contentSignPicture">Content Sign Picture</span></dt>
+                <dd>
+                    <div *ngIf="contentDetails.contentSignPicture">
+                        <a (click)="openFile(contentDetails.contentSignPictureContentType, contentDetails.contentSignPicture)">
+                            <img [src]="'data:' + contentDetails.contentSignPictureContentType + ';base64,' + contentDetails.contentSignPicture" style="max-width: 100%;" alt="contentDetails image"/>
+                        </a>
+                        {{ contentDetails.contentSignPictureContentType }}, {{ byteSize(contentDetails.contentSignPicture) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="schoolOfDeafApp.contentDetails.video">Video</span></dt>
+                <dd>
+                    <span>{{ contentDetails.video }}</span>
+                </dd>
+                <dt><span jhiTranslate="schoolOfDeafApp.contentDetails.content">Content</span></dt>
+                <dd>
+                    <div *ngIf="contentDetails.content">
+                        <a [routerLink]="['/content', contentDetails.content?.id, 'view']">{{ contentDetails.content?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/content-details', contentDetails.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

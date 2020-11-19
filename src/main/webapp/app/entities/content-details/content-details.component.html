@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="schoolOfDeafApp.contentDetails.home.title">Content Details</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-content-details" [routerLink]="['/content-details/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="schoolOfDeafApp.contentDetails.home.createLabel">
+            Create a new Content Details
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="contentDetails?.length === 0">
+        <span jhiTranslate="schoolOfDeafApp.contentDetails.home.notFound">No contentDetails found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="contentDetails && contentDetails.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="schoolOfDeafApp.contentDetails.contentPicture">Content Picture</span></th>
+                    <th scope="col" ><span jhiTranslate="schoolOfDeafApp.contentDetails.contentSignPicture">Content Sign Picture</span></th>
+                    <th scope="col" ><span jhiTranslate="schoolOfDeafApp.contentDetails.video">Video</span></th>
+                    <th scope="col" ><span jhiTranslate="schoolOfDeafApp.contentDetails.content">Content</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let contentDetails of contentDetails ;trackBy: trackId">
+                    <td><a [routerLink]="['/content-details', contentDetails.id, 'view']">{{ contentDetails.id }}</a></td>
+                    <td>
+                        <a *ngIf="contentDetails.contentPicture" (click)="openFile(contentDetails.contentPictureContentType, contentDetails.contentPicture)">
+                            <img [src]="'data:' + contentDetails.contentPictureContentType + ';base64,' + contentDetails.contentPicture" style="max-height: 30px;" alt="contentDetails image"/>
+                        </a>
+                        <span *ngIf="contentDetails.contentPicture">{{ contentDetails.contentPictureContentType }}, {{ byteSize(contentDetails.contentPicture) }}</span>
+                    </td>
+                    <td>
+                        <a *ngIf="contentDetails.contentSignPicture" (click)="openFile(contentDetails.contentSignPictureContentType, contentDetails.contentSignPicture)">
+                            <img [src]="'data:' + contentDetails.contentSignPictureContentType + ';base64,' + contentDetails.contentSignPicture" style="max-height: 30px;" alt="contentDetails image"/>
+                        </a>
+                        <span *ngIf="contentDetails.contentSignPicture">{{ contentDetails.contentSignPictureContentType }}, {{ byteSize(contentDetails.contentSignPicture) }}</span>
+                    </td>
+                    <td>{{ contentDetails.video }}</td>
+                    <td>
+                        <div *ngIf="contentDetails.content">
+                            <a [routerLink]="['/content', contentDetails.content?.id, 'view']" >{{ contentDetails.content?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/content-details', contentDetails.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/content-details', contentDetails.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(contentDetails)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

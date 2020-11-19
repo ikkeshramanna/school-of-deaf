@@ -47,6 +47,10 @@ public class CacheConfiguration {
             createCache(cm, com.schoolofdeaf.app.domain.User.class.getName());
             createCache(cm, com.schoolofdeaf.app.domain.Authority.class.getName());
             createCache(cm, com.schoolofdeaf.app.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.schoolofdeaf.app.domain.Category.class.getName());
+            createCache(cm, com.schoolofdeaf.app.domain.Content.class.getName());
+            createCache(cm, com.schoolofdeaf.app.domain.Content.class.getName() + ".contentDetails");
+            createCache(cm, com.schoolofdeaf.app.domain.ContentDetails.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

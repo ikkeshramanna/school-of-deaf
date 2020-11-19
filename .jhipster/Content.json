@@ -1,0 +1,38 @@
+{
+  "name": "Content",
+  "fields": [
+    {
+      "fieldName": "contentName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "contentDetails",
+      "otherEntityRelationshipName": "content",
+      "relationshipName": "contentDetails"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "content",
+      "relationshipName": "contentCategory",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201119121357",
+  "entityTableName": "content",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
